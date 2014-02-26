@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta http-equiv="Content-Type"content="text/html; charset=utf-8"/>
+	<title> My UIowa </title>
+
+	<link rel="stylesheet" href="siteStyle.css">
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab:300' rel='stylesheet' type='text/css'>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+
+
+<!--Defines Classes Object-->
+	<script>function struct_class(number, nam, teacher, major, time, days){	
+		// Public: visible to the user on the course selection page
+		this.number = "IOWA:00"+number;
+		this.enrolled = "??/50";
+		this.nam = nam;
+		this.teacher = teacher;
+		this.major = major;
+		this.Time = time;
+		this.days = days;
+		this.semester = "Spring 2014";
+		/* Attempted to add hidden variables, could not manage to do so withing time contraints
+		Page would not recognize this as private without breaking the page.
+
+		Private: information only visible on the specific course page
+		this.textbooks = 30.00;
+		this.prerequisites = reqs;
+		this.classroom = place;
+		// */
+			}
+	</script>
+
+
+	<script>// Builds Classes objects
+			One   = new struct_class("1", "Victorian Lierature", "Ann Stapleton", "English", "8 - 9 AM", "M-W-F");
+			Two   = new struct_class("2", "Introduction to Informatics", "Juan Pablo Hourcade", "Computer Science", "6 - 7 PM", "T-Th");
+			Three = new struct_class("3", "That One Class You Really Don't Want to Take", "But You Have To", "Mathmatics","1 - 2 PM", "M-W-F");
+			Four  = new struct_class("4", "Elementary German I", "Bruce Nottingham-Spencer", "German","10 - 11 AM", "T-Th");
+			Five  = new struct_class("5", "Hello: The History of the English Language", "Howard You", "English", "1 - 2 PM", "T-Th");
+			Six   = new struct_class("6", "Transportation Economics", "Barton Cramer", "Ecomnomics","3 - 4 PM", "T-Th");
+			Seven = new struct_class("7", "City as Text / Text as City", "Sabine Golz", "Semniotics", "10 - 11 AM", "M-W-F");
+			Eight = new struct_class("8", "Undergraduate Sculpture I!", "Ann Murphy", "Sculpture", "4 - 5 PM", "T-Th");
+			Nine  = new struct_class("9", "Undergraduate Seminar", "Tagushi Odagiri", "Asian Studies", "1 - 2 PM", "M-W-F");
+			Ten   = new struct_class("10", "Managerial Accounting", "Joyce Berg", "Accounting","2 - 4 PM", "W");
+
+	</script>
+
+
+	<!--Creates an Add / Drops Button for each Class-->
+    <script>  function buttonStatus(n){
+		var text="";
+		var currentClasses = [];
+		var z;
+
+		var ref = n+"_button";
+		var setting= document.getElementById(ref).innerHTML;
+			if (setting=="Drop") { 
+				document.getElementById(ref).innerHTML="Add";
+				currentClasses.pop(Classes[n]);
+				for (z in Classes[n]){
+					drop("schedule"+n);
+				}
+			}
+			
+			else { 
+				document.getElementById(ref).innerHTML="Drop";
+						currentClasses.push(Classes[n]);
+						for (z in Classes[n]){
+							print("schedule"+n,Classes[n][z]);
+						}
+			}
+	}
+    </script>
+
+
+	<script> function print(tag, trait){ document.getElementById(tag).innerHTML+="<td>"+trait+"</td>"; }</script>
+	
+	<script> function drop(tag){ document.getElementById(tag).innerHTML=""; }</script>
+
+
+		<!--Classes sorted by different criteria-->
+	<script>
+			var Classes = [One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten]
+			var tags = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+
+			var NumSortClasses = [One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten]
+			var tagsCourseNum = ["One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"];
+
+			var NameSortClasses = [One, Two, Four, Five, Seven, Six, Three, Ten, Nine, Eight] 
+			var tagsName = ["One", "Two", "Four", "Five", "Seven", "Six", "Three", "Ten", "Nine", "Eight"];
+
+			var TeacherSort = [Three, Seven, Nine, Two, Five, One, Six, Eight, Ten, Four,]
+			var tagsTeacher = ["Three", "Seven", "Nine", "Two", "Five", "One", "Six", "Eight", "Ten", "Four",];
+
+			var MajorSort =[One, Nine, Five, Three, Two, Ten, Seven, Six, Eight, Four]
+			var tagsMajor = ["One", "Nine", "Five", "Three", "Two", "Ten", "Seven", "Six", "Eight", "Four"];
+
+			var TimeSort = [One, Four, Seven, Five, Three, Nine, Ten, Six, Eight, Two]
+			var tagsTime = ["One", "Four", "Seven", "Five", "Three", "Nine", "Ten", "Six", "Eight", "Two"];
+
+			var DaysSort = [One, Seven, Three, Ten, Nine, Two, Four, Five, Six, Eight]
+			var tagsDays = ["One", "Seven", "Three", "Ten", "Nine", "Two", "Four", "Five", "Six", "Eight"];
+
+	</script>
+
+
+
+
+    <!--Creates a list of classes by assigning values to elements in a Classes object, and calling those elements
+    Currently there is a bug: the order of the classes is hard coded in to the body of the page, and I need it to generate in the order I give it-->
+	<script> function createClasses(){
+			// Clears the table before writing the classes
+			
+			// allows separate values to be printed from the Classes object
+			var x;
+
+			for(i=0; i<Classes.length; i++){// Classes.length
+				for (x in Classes[i]){
+					print(tags[i], Classes[i][x]);
+		 		}
+		 		var ref = i+"_button";
+		 		print(tags[i], '<button onclick="buttonStatus('+i+')" id='+ref+'> Add </button><br><a href="popBox.html" title="#viewClass'+i+'"><button type="button" id='+ref+'> View Class </button></a>');
+
+		 	}
+		}
+
+		</script>
+	
+</head>
+
+<body onload="createClasses(NameSortClasses, tagsName)">
+
+
+      <a href="home.html"><img src="MyIowa.png" alt="Icon" width=95% height=20%></a><nav id="Menubar"><script> $("#Menubar").load("menubar.html")</script></nav> 
+
+	<section>
+			<h1> 
+				COURSES
+			</h1>
+	</section>
+
+
+
+	<section>
+		<h2> 
+			Current Schedule
+		</h2>
+
+		<table border="1">
+			<tr>
+				<th>Course Number</th>
+				<th>Enrollment</th>
+				<th>Class</th>
+				<th>Teacher</th>
+				<th>Major</th>
+				<th>Time</th>
+				<th>Days</th>
+				<th>Semester</th>
+			</tr>
+			<tr id="schedule0"></tr>
+			
+			<tr id="schedule1"></tr>
+
+			<tr id="schedule2"></tr>
+
+			<tr id="schedule3"></tr>
+
+			<tr id="schedule4"></tr>
+
+			<tr id="schedule5"></tr>
+
+			<tr id="schedule6"></tr>
+
+			<tr id="schedule7"></tr>
+
+			<tr id="schedule8"></tr>
+
+			<tr id="schedule9"></tr>
+
+			<tr id="schedule10"></tr>
+
+
+		</table>
+	</section>
+
+
+
+
+
+
+	<section>
+		<h2> 
+			Class List
+		</h2>
+	<!--Different methods of sorting the classes-->
+
+		<aside>
+			<button type="button" onclick="popup()"> Sort By Class Names </button>
+			
+			<button type="button" onclick="alert('Sorry! This function does not exist.')"> Sort By Course Number </button>
+			
+
+			<button type="button" onclick="alert('Sorry! This function does not exist.')"> Sort By Teacher </button>
+			
+			<button type="button" onclick="alert('Sorry! This function does not exist.')"> Sort By Major </button>
+			
+			<button type="button" onclick="alert('Sorry! This function does not exist.')"> Sort By Time </button>
+			
+			<button type="button" onclick="alert('Sorry! This function does not exist.')"> Sort By Days </button>
+		</aside>
+
+		<table border="1">
+			<tr>
+				<th>Course Number</th>
+				<th>Enrollment</th>
+				<th>Class</th>
+				<th>Teacher</th>
+				<th>Major</th>
+				<th>Time</th>
+				<th>Days</th>
+				<th>Semester</th>
+			</tr>
+
+			<!--Class # 1-->
+			<tr id="One"> </tr>
+
+			<!--Class # 2-->
+			<tr id="Two"></tr>
+
+			<!--Class # 3-->
+			<tr id="Three"></tr>
+
+			<!--Class # 4-->
+			<tr id="Four"></tr>
+
+			<!--Class # 5-->
+			<tr id="Five"></tr>
+
+			<!--Class # 6-->
+			<tr id="Six"></tr>
+
+			<!--Class # 7-->
+			<tr id="Seven"></tr>
+
+			<!--Class # 8-->
+			<tr id="Eight"></tr>
+
+			<!--Class # 9-->
+			<tr id="Nine"></tr>
+
+			<!--Class # 10-->
+			<tr id="Ten"></tr>
+		</table>
+
+	<br>
+
+			<footer>
+	            <p>MyIowa: The Student Information System <link rel="Home.html" href="Help"/></p>
+	            <br>
+	        </footer>
+
+	</section>
+
+
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta http-equiv="Content-Type"content="text/html; charset=utf-8"/>
+    <title> My UIowa </title>
+
+    <link rel="stylesheet" href="siteStyle.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab:300' rel='stylesheet' type='text/css'>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!--Checks password input-->
+    <script> function samePass(){
+            var oldPassword= document.getElementById("old_Pword").value;
+            var newPassword= document.getElementById("pword").value;
+            var newPassword2= document.getElementById("pword2").value;
+            var shmalert = "You've Successfully Changed Your Password!";
+
+            var confirm= newPassword.localeCompare(newPassword2);
+
+            var changed= oldPassword.localeCompare(newPassword);
+            
+            if (oldPassword, newPassword, newPassword2 = ""){shmalert="Please Enter a Password";}
+            else{
+                // Checks if the two new passwords are the same
+                if(confirm != 0){shmalert= "These password do not match. Please re-enter your password.";}
+
+                // Checks if the new password and the old password are the same
+                else{ if (changed == 0){shmalert = "This is not a new password. Please pick a new password.";} 
+                      else{ oldPassword = newPassword2;}
+                  }
+            }
+
+
+        }
+    </script>
+
+    <script> function spaces(n, tag){ 
+        for(i=0; i<n; i++){
+            document.getElementById(tag).innerHTML+="&nbsp";
+        }
+    }
+    </script>
+
+</head>
+
+<body>
+
+         <a href="home.html"><img src="MyIowa.png" alt="Icon" width=95% height=20%></a><nav id="Menubar"><script> $("#Menubar").load("menubar.html")</script></nav>  
+
+        <section>
+             <h1> Student Profile</h1>
+        </section>
+
+
+        <section>
+
+        <h2> Profile Management</h2>
+    
+            <p> Fill out the entries on this page. When you do, you can use this page to automatically fill out forms on the Forms Page.</p>
+
+      
+             <form>
+                Full Name:   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  <input type="text" value=""> <br>
+                Student ID: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp   0123456789<!--<input type="text" value="01233456789"> --><br>
+                School Address:&nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" value=""> <br>
+                Home Address:  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" value=""> <br> 
+                Major:&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     <input type="text" value=""> <br> 
+                Phone Number: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" value=""> <br> 
+                Home Address:  &nbsp&nbsp&nbsp&nbsp&nbsp <input type="text" value=""> <br>
+            </form> 
+            <br><br>
+
+            <button onclick="samePass()"> Save Your Profile  </button><br><br>
+
+            <p id="success"> </p>
+        </section>
+
+
+        <section>
+            <h2> Password Management </h2>
+
+   
+
+            <p>Remember, you should change your password every 30 days to stay secure.</p><!--<br><br><br>-->
+
+            <p>Select a domain, then change your password below:</p>
+            <select>
+                <option value="Main">Main</option>
+                <option value="Hawkmail">Hawkmail</option>
+                <option value="MathLab">MathLab</option>
+                <option value="Other">Other</option>
+            </select>
+
+      
+             <form>
+               <br>
+                Current Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id ="old_Pword" name="old_Pword" value=""> <br>
+                Please Enter Your New Password:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <input type="password" id="pword" name="pword" value=""> <br>
+                Re-enter Your New Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="password" id="pword2" name="pword2" value=""> <br> <br>  
+            </form> 
+
+            <button onclick="samePass()"> Save Password  </button><br><br>
+
+            <p id="success"> </p>
+
+            <p>Having trouble remembering your passwords? We've stored them below:</p>
+            <select>
+                <option value="Default">Current Passwords</option>
+                <option value="Main">Main: Main Password</option>
+                <option value="Hawkmail">Hawkmail: Main Password</option>
+                <option value="MathLab">MathLab: Main Password</option>
+                <option value="Other" >Other: Main Password</option>
+            </select>
+                    <br><br>
+
+            <footer>
+                <p>MyIowa: The Student Information System <link rel="Home.html" href="Help"/></p>
+                <br>
+            </footer>
+        
+        </section>
+
+
+
+
+
+    
+</body>
+</html>
